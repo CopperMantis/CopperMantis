@@ -39,3 +39,6 @@ test:
 lint:
 	go fmt $(SOURCES)
 	go vet $(SOURCES)
+
+# Goa realated and misc targets
+include build/*.mk
