@@ -8,7 +8,7 @@ BINARY=copper-mantis
 VERSION=0.1.0
 
 SOURCEDIR=.
-SOURCES := $(shell find $(SOURCEDIR) -type f -name '*.go' ! -path '$(SOURCEDIR)/design/*' )
+SOURCES := $(shell find $(SOURCEDIR) -type f -name '*.go' ! -path '$(SOURCEDIR)/design/*'  ! -path '$(SOURCEDIR)/vendor/*' )
 BUILD_TIME=$(shell date +%FT%T%z)
 GIT_COMMIT=$(shell git rev-parse --verify HEAD)
 
@@ -33,8 +33,8 @@ clean-vendor:
 
 # Test
 .PHONY: test lint
-test:
-	go test -v $(SOURCE) -cover
+test: vendor lint
+	go test -v $(SOURCES) -cover
 
 lint:
 	go fmt $(SOURCES)
